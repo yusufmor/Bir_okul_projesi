@@ -2,30 +2,53 @@ import random
 
 
 class Robot_musun:
-    def oto_deger_ata(func):
-        def wrapper(self):
+    @classmethod
+    def rastgele_olustur(cls, sayisal_agirlikli: bool, sozel_agirlikli: bool, alf_numeric_agirlikli: bool, hane: int) -> str:
+        """Rastgele sayi oluştuır
 
-            random_deger1 = random.randint(1, 10)
-            random_deger2 = random.randint(1, 10)
-            random_deger3 = random.randint(1, 10)
-            random_deger4 = random.randint(1, 10)
-            random_deger5 = random_deger1 + random_deger2 + random_deger3 + random_deger4
+        Bu fonksiyon sayesinde otomatik olarak rastgele bir string oluşturulur
 
-            func(self, random_deger5, random_deger1,
-                 random_deger2, random_deger3, random_deger4)
-            
-        return wrapper
+        Args:
+            sayisal_agirlikli (bool): bool Eğer string'in içinde sayisal agirlik olsun diyorsanız True giriniz ..:
+            sozel_agirlikli (bool): bool Eğer string'in içinde sozel agirlik olsun diyors anız True giriniz ..:
+            alf_numeric_agirlikli (bool): bool Eğer string'in içinde alfanumeric karakter agirlik olsun diyorsanız True giriniz ..:
+            hane (int): Kaç haneli olsun
 
-    @oto_deger_ata
-    def __init__(self, hane=4, number=1, b_char=1, s_char=1, alf_numeric_karakter=1) -> str:
-        self.hane = hane
+        Returns:
+            str: Döenen Değer string'tir
+        """
+        hane = int(hane)
+        sayisal_agirlikli = bool(sayisal_agirlikli)
+        sozel_agirlikli = bool(sozel_agirlikli)
+        alf_numeric_agirlikli = bool(alf_numeric_agirlikli)
+
+        if hane <= 4:
+            TypeError("Hane Sıfırdan Büytük olmalı")
+
+        agirlik = round(hane * 0.6, 0)
+        azinlik = round(hane * 0.2, 0)
+
+        if (sayisal_agirlikli == sozel_agirlikli) != alf_numeric_agirlikli\
+                and alf_numeric_agirlikli == True:
+            cls(azinlik, azinlik // 2, azinlik // 2, agirlik)
+
+        elif (alf_numeric_agirlikli == sozel_agirlikli) != sayisal_agirlikli\
+                and sayisal_agirlikli == True:
+            cls(agirlik, azinlik // 2, azinlik // 2, azinlik)
+
+        elif (sayisal_agirlikli == alf_numeric_agirlikli) != sozel_agirlikli\
+                and sozel_agirlikli == True:
+            cls(azinlik, agirlik // 2, agirlik // 2, azinlik)
+
+        else:
+            raise Warning("Ne yapıyon be abi gözünü seviyim be abla")
+
+    def __init__(self, number: int = 1, b_char: int = 1, s_char: int = 1, alf_numeric_karakter: int = 1) -> None:
         self.number_no = number
         self.b_char_no = b_char
         self.s_char_no = s_char
         self.alfa_numeric_karakter_no = alf_numeric_karakter
-
-        if self.number_no + self.b_char_no + self.s_char_no + self.alfa_numeric_karakter_no != self.hane:
-            raise Exception("Hane sayısı yetersiz")
+        self.hane = number + b_char + s_char + alf_numeric_karakter
 
     """
         number_no = Bu değişkenin içinde robotmusnun metininde kaç tane                 #! SAYI olduğunu söyler
@@ -34,7 +57,7 @@ class Robot_musun:
         alfa_numeric_karakter_no = Bu değişkenin içinde robotmusnun metininde kaç tane  #! ALFA NUMERİC KARAKTER OLACAĞINI SÖYLER olduğunu söyler
     """
 
-    def random_number(self):  # Random number karakter
+    def random_number(self) -> int:  # Random number karakter
         numbers_list = []  # Bu listenin içinde rastgele sayılar tutulacak
 
         i = 0  # Döngü değişkeni
@@ -45,7 +68,7 @@ class Robot_musun:
             i += 1  # İ artar
         return numbers_list
 
-    def random_s_char(self):  # Random small char karakter
+    def random_s_char(self) -> int:  # Random small char karakter
         s_char_list = []
 
         i = 0
@@ -55,7 +78,7 @@ class Robot_musun:
             i += 1
         return s_char_list
 
-    def random_b_char(self):  # Random Big char karakter
+    def random_b_char(self) -> int:  # Random Big char karakter
         b_char_list = []
 
         i = 0
@@ -65,7 +88,7 @@ class Robot_musun:
             i += 1
         return b_char_list
 
-    def random_alfa_numeric_char(self):
+    def random_alfa_numeric_char(self) -> int:
 
         alfa_numeric_list = []
 
@@ -84,7 +107,8 @@ class Robot_musun:
 
         return alfa_numeric_list
 
-    def robot_musun_test_sorusu(self): # Burada olan işlem bir sonuç string'in içine rastgele olarak deger atar
+    # Burada olan işlem bir sonuç string'in içine rastgele olarak deger atar
+    def robot_musun_test_sorusu(self) -> str:
         result_string = str()
 
         random_list = set()
@@ -94,17 +118,16 @@ class Robot_musun:
                 random_list.add(i1)
         for i in random_list:
             result_string = result_string + str(i)
-        self.robot_test_sorusu_string = result_string    
+        self.robot_test_sorusu_string = result_string
         return result_string
-    
-    def Robot_mu(self ,return_answer):
+
+    def Robot_mu(self, return_answer : str) -> bool:
         is_bot = False
         if self.robot_test_sorusu_string == return_answer:
             is_bot = True
         else:
             raise BaseException("Seni gidi robot seni")
         return is_bot
-
 
 
 # 33 ve 126
