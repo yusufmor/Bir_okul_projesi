@@ -35,7 +35,3 @@ class Ses_cal():
         sarki.play(calma_sayisi)  
 
 A = Ses_cal(os.getcwd() +os.sep + "Ses_ve_Gorunti" + os.sep + "Sesler" + os.sep + "ses4.mp3")
-
-A.Kackere_clasin(3)
-
-input("")
