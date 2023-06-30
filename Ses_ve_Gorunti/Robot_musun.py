@@ -3,7 +3,7 @@ import random
 
 class Robot_musun:
     @classmethod
-    def rastgele_olustur(cls, sayisal_agirlikli: bool, sozel_agirlikli: bool, alf_numeric_agirlikli: bool, hane: int) -> str:
+    def rastgele_olustur(cls, sayisal_agirlikli: bool = False, sozel_agirlikli: bool = False, alf_numeric_agirlikli: bool = False, hane: int = 8):
         """Rastgele sayi oluştuır
 
         Bu fonksiyon sayesinde otomatik olarak rastgele bir string oluşturulur
@@ -28,17 +28,17 @@ class Robot_musun:
         agirlik = round(hane * 0.6, 0)
         azinlik = round(hane * 0.2, 0)
 
-        if (sayisal_agirlikli == sozel_agirlikli) != alf_numeric_agirlikli\
+        if not (sayisal_agirlikli == sozel_agirlikli) != alf_numeric_agirlikli\
                 and alf_numeric_agirlikli == True:
-            cls(azinlik, azinlik // 2, azinlik // 2, agirlik)
+            return cls(azinlik, azinlik // 2, azinlik // 2, agirlik)
 
-        elif (alf_numeric_agirlikli == sozel_agirlikli) != sayisal_agirlikli\
+        elif not (alf_numeric_agirlikli == sozel_agirlikli) != sayisal_agirlikli\
                 and sayisal_agirlikli == True:
-            cls(agirlik, azinlik // 2, azinlik // 2, azinlik)
+            return cls(agirlik, azinlik // 2, azinlik // 2, azinlik)
 
-        elif (sayisal_agirlikli == alf_numeric_agirlikli) != sozel_agirlikli\
+        elif not (sayisal_agirlikli == alf_numeric_agirlikli) != sozel_agirlikli\
                 and sozel_agirlikli == True:
-            cls(azinlik, agirlik // 2, agirlik // 2, azinlik)
+            return cls(azinlik, agirlik // 2, agirlik // 2, azinlik)
 
         else:
             raise Warning("Ne yapıyon be abi gözünü seviyim be abla")
@@ -49,6 +49,7 @@ class Robot_musun:
         self.s_char_no = s_char
         self.alfa_numeric_karakter_no = alf_numeric_karakter
         self.hane = number + b_char + s_char + alf_numeric_karakter
+        self.robot_test_sorusu_string = self.robot_musun_test_sorusu()
 
     """
         number_no = Bu değişkenin içinde robotmusnun metininde kaç tane                 #! SAYI olduğunu söyler
@@ -118,22 +119,13 @@ class Robot_musun:
                 random_list.add(i1)
         for i in random_list:
             result_string = result_string + str(i)
-        self.robot_test_sorusu_string = result_string
+
         return result_string
 
-    def Robot_mu(self, return_answer : str) -> bool:
+    def Robot_mu(self, return_answer: str) -> bool:
         is_bot = False
         if self.robot_test_sorusu_string == return_answer:
             is_bot = True
         else:
             raise BaseException("Seni gidi robot seni")
         return is_bot
-
-
-# 33 ve 126
-robotum = Robot_musun()
-print(robotum.robot_musun_test_sorusu())
-a = False
-while a:
-    a = input("Bir şey gir")
-    robotum.Robot_mu(a)
