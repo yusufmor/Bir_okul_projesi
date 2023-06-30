@@ -79,7 +79,7 @@ class Dosya_düzenleme():  # Bu class bir klasördeki dosyaları adını isteğe
 
     def __call__(self):  # Obje fonksiyon gibi çağrıldığında çalışacak fonksiyon
         if not os.path.isdir(self.Dosya_yolu + self.Hangi_dosya):
-            os.mkdir(self.Hangi_dosya)
+            os.mkdir(self.Dosya_yolu + self.Hangi_dosya)
             print(self.Hangi_dosya, "is created")
 
         sayac = 0
